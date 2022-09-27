@@ -1,0 +1,65 @@
+===============================================================================
+
+								Tema MN 2021		  
+						Interpolare aplicata pe imagini
+							Stroe Teodora, 311CA
+
+===============================================================================
+
+1. Detalii implementare
+
+	  Toate interpolarile implementate tin cont de mentinerea stabila a originii
+	imaginiilor folosite!
+
+	- punctele din jur:
+	  -- se foloseste functia floor() pentru a afla vecinii unui pixel
+	  -- se trateaza separat cazurile de exceptie (ultima linie/coloana)
+
+	- vector/matrice de coeficienti:
+	  -- se calculeaza cele doua matrici intermediare
+	  -- se afla coeficientii, aplicand formula data
+
+	- precalculare derivate:
+	  -- se parcurge intreaga imagine
+	  -- pentru fiecare pixel, se calculeaza matricea derivatelor dx, dy, dxy
+	  -- se tine cont, in fiecare caz, de marginile imaginii, unde se pune un pixel negru
+
+	- imagini 2x2:
+	  NEAREST-NEIGHBOUR: se afla vecinii din imag initiala si se calc pixelul final
+	  BILINEAR: se utilizeaza functia polinomiala ce utilizeaza coeficientii binomiali
+				pentru calculul pixelului final
+
+	- redimensionare:
+	  -- se calculeaza factorii de scalare si matricea de redimensionare
+	  -- se afla vecinii si valoarea interpolata a pixelilor
+	  	 ├─ NEAREST-NEIGHBOUR: se foloseste functia round()
+		 ├─ BILINEAR: se aplica functia polinomiala
+		 └─ BICUBIC: - se trec coordonatele punctelor din imag initiala in patratul unitate
+					 - se aplica functia ce utilizeaza matricea coeficientilor bicubici 
+
+	- rotire:
+	  -- se afla matricea de rotatie
+	  -- se afla vecinii si valoarea interpolata a pixelilor
+	     └─ BILINEAR: - se aplica functia polinomiala
+					  - in cazul unui pixel din afara imaginii, se pune un pixel negru
+
+	- RGB (indiferent de metoda interpolarii):
+	  -- se extrag cele 3 canale (R/G/B)
+	  -- se aplica algoritmul pe fiecare canal in parte
+	  -- se unesc cele 3 canale modificate pentru a forma imaginea finala
+
+===============================================================================
+
+2. Feedback
+
+	Plusuri:
+	  - m-a ajutat la intelegerea aplicabilitatii practice a metodelor numerice
+	  - m-a ajutat la imbunatatirea skill-urilor de folosire a Octave
+	  - enuntul temei a fost clar, iar explicatiile suplimentare de pe forum si cele din
+	    schelet au fost foarte folositoare
+	  - disponibilitatea responsabililor cu tema
+
+	Minusuri:
+	  - jumatate din link-urile mentionate in referinte nu functioneaza
+	  - ar fi fost foarte folositoare explicatii aditionale referitoare la relatia de 
+		corespondenta dintre variabilele x, y din formulele date si folosirea lor in implementare
